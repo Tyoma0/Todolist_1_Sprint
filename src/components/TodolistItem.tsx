@@ -1,5 +1,7 @@
 import {Button} from "./Button.tsx";
 import {FilterValuesType} from "../App.tsx";
+import {Input} from "./Input.tsx";
+import {useState} from "react";
 
 
 export type TaskType = {
@@ -17,12 +19,25 @@ type PropsType = {
 
 
 export const TodolistItem = (props: PropsType) => {
+    let [title, setTitle] = useState('')
+
+
+    const addMassage=(title:string)=>{
+        let message = {message:title};
+        setMassage([newMessage,...message])
+    }
+
+    const onClickButtonHandler = () => {
+        addMassage(title)
+        setTitle('')
+    }
+
     return (
         <div>
             <h3>{props.title}</h3>
             <div>
-                <input/>
-                <Button title={'+'}/>
+                <Input setTitle={setTitle} title={title}/>
+                <Button onClick={onClickButtonHandler} title={'+'}/>
             </div>
 
             <ul>
@@ -41,9 +56,18 @@ export const TodolistItem = (props: PropsType) => {
             </ul>
 
             <div>
-                <button onClick={()=>{props.changeFilter('all')}}>All</button>
-                <button onClick={()=>{props.changeFilter('completed')}}>Completed</button>
-                <button onClick={()=>{props.changeFilter('active')}}>Active</button>
+                <button onClick={() => {
+                    props.changeFilter('all')
+                }}>All
+                </button>
+                <button onClick={() => {
+                    props.changeFilter('completed')
+                }}>Completed
+                </button>
+                <button onClick={() => {
+                    props.changeFilter('active')
+                }}>Active
+                </button>
             </div>
         </div>
     );
