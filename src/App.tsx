@@ -17,7 +17,7 @@ export const App = () => {
         {id: 6, title: 'RTK query', isDone: false},
     ])
 
-    let [filter, setFilter] = useState<FilterValuesType>('completed')
+    let [filter, setFilter] = useState<FilterValuesType>('all')
 
 
     function removeTask(id: number) {
