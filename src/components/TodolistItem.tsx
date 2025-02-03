@@ -10,11 +10,12 @@ export type TaskType = {
     isDone: boolean
 }
 
-type PropsType = {
+ type PropsType = {
     title: string
     tasks: Array<TaskType>
     removeTask: (id: number) => void
     changeFilter: (value: FilterValuesType) => void
+    addTask: (title: string) => void;
 }
 
 
@@ -22,13 +23,12 @@ export const TodolistItem = (props: PropsType) => {
     let [title, setTitle] = useState('')
 
 
-    const addMassage=(title:string)=>{
-        let message = {message:title};
-        setMassage([newMessage,...message])
-    }
+
 
     const onClickButtonHandler = () => {
-        addMassage(title)
+        if (title.trim()) {
+            props.addTask(title);
+        }
         setTitle('')
     }
 
