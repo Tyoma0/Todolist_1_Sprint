@@ -65,7 +65,7 @@ export const TodolistItem = (props: PropsType) => {
                 }}>Completed
                 </button>
                 <button onClick={() => {
-                    props.changeFilter('activee')
+                    props.changeFilter('active')
                 }}>Active
                 </button>
             </div>
