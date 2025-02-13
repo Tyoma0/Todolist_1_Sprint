@@ -29,7 +29,7 @@ export const TodolistItem = (props: PropsType) => {
         if (title.trim()) {
             props.addTask(title);
         }
-        setTitle('1')
+        setTitle('')
     }
 
     return (
