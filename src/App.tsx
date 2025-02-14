@@ -47,9 +47,11 @@ export const App = () => {
         tasksForTodolist = tasks.filter(t => t.isDone === false)
     }
 
+    const title_1 = "What to learn"
+
     return (
         <div className="app">
-            <TodolistItem addTask={addTask} changeFilter={changeFilter} title="What to learn" tasks={tasksForTodolist} removeTask={removeTask}/>
+            <TodolistItem addTask={addTask} changeFilter={changeFilter} text={title_1} tasks={tasksForTodolist} removeTask={removeTask}/>
         </div>
     );
 }
