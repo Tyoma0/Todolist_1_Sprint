@@ -21,8 +21,7 @@ export const App = () => {
 
 
     function removeTask(id: string) {
-        let filterTasks = tasks.filter(t => t.id !== id);
-        setTasks(filterTasks)
+        setTasks(tasks.filter(t => t.id !== id))
     }
 
     function changeFilter(value:FilterValuesType) {
@@ -51,7 +50,7 @@ export const App = () => {
 
     return (
         <div className="app">
-            <TodolistItem addTask={addTask} changeFilter={changeFilter} text={title_1} tasks={tasksForTodolist} removeTask={removeTask}/>
+            <TodolistItem removeTask={removeTask} addTask={addTask} changeFilter={changeFilter} text={title_1} tasks={tasksForTodolist} />
         </div>
     );
 }

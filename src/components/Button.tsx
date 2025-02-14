@@ -4,9 +4,9 @@ type Props = {
 }
 
 
-export const Button = (props: Props) => {
+export const Button = ({title,onClick}: Props) => {
     const onClickButtonHandler = () => {
-        props.onClick()
+        onClick()
     }
-    return <button onClick={onClickButtonHandler}>{props.title}</button>
+    return <button onClick={onClickButtonHandler}>{title}</button>
 }

@@ -12,7 +12,7 @@ export type TaskType = {
 
  type PropsType = {
     text: string
-    tasks: Array<TaskType>
+    tasks: TaskType[]
     removeTask: (id: string) => void
     changeFilter: (value: FilterValuesType) => void
     addTask: (title: string) => void;
@@ -32,6 +32,19 @@ export const TodolistItem = ({text,tasks,removeTask,changeFilter,addTask}: Props
         setTitle('')
     }
 
+    const mappedTasks =tasks.map((task) => {
+            return (
+                <li key={task.id}>
+                    <input type='checkbox' checked={task.isDone}/>
+                    <span>{task.title}</span>
+                    <button onClick={() => {
+                        removeTask(task.id)
+                    }}>x
+                    </button>
+                </li>
+            );
+        })
+
     return (
         <div>
             <h3>{text}</h3>
@@ -41,18 +54,7 @@ export const TodolistItem = ({text,tasks,removeTask,changeFilter,addTask}: Props
             </div>
 
             <ul>
-                {tasks.map((task) => {
-                    return (
-                        <li key={task.id}>
-                            <input type='checkbox' checked={task.isDone}/>
-                            <span>{task.title}</span>
-                            <button onClick={() => {
-                                removeTask(task.id)
-                            }}>x
-                            </button>
-                        </li>
-                    );
-                })}
+                {mappedTasks}
             </ul>
 
             <div>
