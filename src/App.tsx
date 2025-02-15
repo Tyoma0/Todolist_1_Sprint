@@ -28,6 +28,16 @@ export const App = () => {
         setFilter(value)
     }
 
+
+    let tasksForTodolist = tasks;
+
+    if (filter === 'completed') {
+        tasksForTodolist = tasks.filter(t => t.isDone === true)
+    }
+    if (filter === 'activ') {
+        tasksForTodolist = tasks.filter(t => t.isDone === false)
+    }
+
     function addTask(title: string) {
         const newTask: TaskType = {
             id: v1(),
@@ -38,13 +48,8 @@ export const App = () => {
     }
 
 
-    let tasksForTodolist = tasks;
-    if (filter === 'completed') {
-        tasksForTodolist = tasks.filter(t => t.isDone === true)
-    }
-    if (filter === 'active') {
-        tasksForTodolist = tasks.filter(t => t.isDone === false)
-    }
+
+
 
     const title_1 = "What to learn"
 
