@@ -6,3 +6,19 @@
 .app > div {
   margin-right: 50px;
 }
+
+.task-done{
+  color: green;
+  text-decoration: line-through;
+}
+
+.task{
+  font-weight: bold;
+}
+.active-filter {
+  background-color: lightgreen;
+}
+.taskInputError{
+  border: 2px solid red;
+  outline: none;
+}
