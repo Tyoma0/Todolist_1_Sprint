@@ -13,7 +13,7 @@ function App() {
   console.log(typeof v1()); "2cab5250-e7ca-11ef-a274-0b1757d973bf"
 
   // BLL:
-  const todolistTitle: string = "Whatа to learn"
+  const todolistTitle: string = "What to learn"
 
   const [tasks, setTasks] = React.useState<Array<TaskType>>([
     { id: v1(), title: "HTML", isDone: true },
