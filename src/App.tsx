@@ -10,7 +10,7 @@ export type FilterValuesType = "all" | "active" | "completed"
 
 // (C)-(R)-(U1)-(D)
 function App() {
-  console.log(typeof v1()); "2cab5250-e7ca-11ef-a274-0b1757d973bf"
+
 
   // BLL:
   const todolistTitle: string = "What to learn"
