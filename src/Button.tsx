@@ -3,7 +3,7 @@ type Props = {
     title: string
     onClickHandler?: () => void
     isDisabled?: boolean
-    className?: strin
+    className?: string
 }
 
 
