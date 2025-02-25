@@ -71,7 +71,6 @@ function App() {
         // setTasks(nextState)
     }
     //UI:
-    // const [filter, setFilter] = React.useState<FilterValuesType>("all")
     const changeTodolistFilter = (todolistID: string, newFilterValue: FilterValuesType) => {
         setTodolists(todolists.map(filtered => filtered.id === todolistID ? {
             ...filtered,
