@@ -48,7 +48,7 @@ const [error, setError] = useState<boolean>(false)
         }else{
             setError(true)
         }
-        setTaskTitle("")
+        setTaskTitle("1")
     }
 
     const createTaskOnKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
