@@ -1,6 +1,7 @@
-import {useState, type KeyboardEvent} from "react"
+// import {useState, type KeyboardEvent} from "react"
 import {FilterValuesType} from "./App"
 import {Button} from "./Button"
+import {AddItemForm} from "./AddItemForm.tsx";
 
 type TodolistPropsType = {
     title: string
@@ -11,6 +12,7 @@ type TodolistPropsType = {
     changeTaskStatus: (todolistID: string, taskId: string, newStatus: boolean) => void
     filter: FilterValuesType
     todolistID: string
+    deleteTodolist:(todolistID: string) => void
 }
 
 export type TaskType = {
@@ -21,6 +23,7 @@ export type TaskType = {
 
 export const Todolist = ({
                              title,
+                             deleteTodolist,
                              tasks,
                              deleteTask,
                              createTask,
@@ -30,8 +33,8 @@ export const Todolist = ({
                              todolistID
                          }: TodolistPropsType) => {
 
-    const [taskTitle, setTaskTitle] = useState<string>("")
-    const [error, setError] = useState<boolean>(false)
+    // const [taskTitle, setTaskTitle] = useState<string>("")
+    // const [error, setError] = useState<boolean>(false)
 
 
     const tasksList = tasks.length === 0
@@ -50,46 +53,55 @@ export const Todolist = ({
             })}
         </ul>
 
-    const createTaskOnClickHandler = () => {
-        const trimmedTitle = taskTitle.trim()
-        if (trimmedTitle) {
-            createTask(todolistID, trimmedTitle)
-        } else {
-            setError(true)
-        }
-        setTaskTitle("")
+    // const createTaskOnClickHandler = () => {
+    //     const trimmedTitle = taskTitle.trim()
+    //     if (trimmedTitle) {
+    //         createTask(todolistID, trimmedTitle)
+    //     } else {
+    //         setError(true)
+    //     }
+    //     setTaskTitle("")
+    // }
+
+    // const createTaskOnKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+    //     if (e.key === "Enter" && taskTitle && taskTitle.length <= 15) {
+    //         createTaskOnClickHandler()
+    //     }
+    // }
+
+
+    const createTaskHandler=(title: string)=>{
+        createTask(todolistID,title)
     }
 
-    const createTaskOnKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter" && taskTitle && taskTitle.length <= 15) {
-            createTaskOnClickHandler()
-        }
-    }
 
     return (
         <div>
-            <h3>{title}</h3>
-            <div>
-                <input
-                    value={taskTitle}
-                    placeholder="max title length is 15 charters"
-                    onChange={(e) => {
-                        error && setError(false)
-                        setTaskTitle(e.currentTarget.value)
-                    }}
-                    onKeyDown={createTaskOnKeyDownHandler}
-                    className={error ? "taskInputError" : ''}
-                />
-                <Button
-                    title="+"
-                    isDisabled={!taskTitle || taskTitle.length > 15}
-                    onClickHandler={createTaskOnClickHandler}
-                />
-            </div>
 
-            {taskTitle && taskTitle.length <= 15 && <div>max title length is 15 charters</div>}
-            {taskTitle.length > 15 && <div style={{color: "red"}}>title is too long</div>}
-            {error && <div style={{color: "red"}}>title is required</div>}
+            <h3>{title} <Button title={'Delete Todolist'} onClickHandler={()=>deleteTodolist(todolistID)}/></h3>
+
+            <AddItemForm  addItem={createTaskHandler}/>
+            {/*<div>*/}
+            {/*    <input*/}
+            {/*        value={taskTitle}*/}
+            {/*        placeholder="max title length is 15 charters"*/}
+            {/*        onChange={(e) => {*/}
+            {/*            error && setError(false)*/}
+            {/*            setTaskTitle(e.currentTarget.value)*/}
+            {/*        }}*/}
+            {/*        onKeyDown={createTaskOnKeyDownHandler}*/}
+            {/*        className={error ? "taskInputError" : ''}*/}
+            {/*    />*/}
+            {/*    <Button*/}
+            {/*        title="+"*/}
+            {/*        isDisabled={!taskTitle || taskTitle.length > 15}*/}
+            {/*        onClickHandler={createTaskOnClickHandler}*/}
+            {/*    />*/}
+            {/*</div>*/}
+
+            {/*{taskTitle && taskTitle.length <= 15 && <div>max title length is 15 charters</div>}*/}
+            {/*{taskTitle.length > 15 && <div style={{color: "red"}}>title is too long</div>}*/}
+            {/*{error && <div style={{color: "red"}}>title is required</div>}*/}
             {tasksList}
             <div>
                 <Button className={filter === 'all' ? 'active-filter' : ''} title="All"
