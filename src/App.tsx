@@ -81,21 +81,21 @@ function App() {
     }
 
 
-    const deleteTodolist =(todolistID: string)=>{
-        setTodolists(todolists.filter(tl=>tl.id !== todolistID))
+    const deleteTodolist = (todolistID: string) => {
+        setTodolists(todolists.filter(tl => tl.id !== todolistID))
         delete tasks[todolistID]
     }
 
-    const addTodolist=( title: string)=>{
-        const id=v1()
-const newTodolist:todolistsType = {id, title: title, filter: 'all'}
-        setTodolists([...todolists,newTodolist])
-        setTasks({...tasks,[id]:[]})
+    const addTodolist = (title: string) => {
+        const id = v1()
+        const newTodolist: todolistsType = {id, title: title, filter: 'all'}
+        setTodolists([...todolists, newTodolist])
+        setTasks({...tasks, [id]: []})
     }
 
     return (
         <div className="app">
-            <AddItemForm  addItem={addTodolist}/>
+            <AddItemForm addItem={addTodolist}/>
             {todolists.map((mapTodolists) => {
                 let tasksForTodolist = tasks[mapTodolists.id]
                 if (mapTodolists.filter === "active") {

@@ -13,7 +13,7 @@ export const AddItemForm = ({addItem}: Props) => {
     const [error, setError] = useState<boolean>(false)
 
     const createItemOnKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter" && itemTitle && itemTitle.length <= 15) {
+        if (e.key === "Enter" && itemTitle && itemTitle.length <= 16) {
             createItemOnClickHandler()
         }
     }
