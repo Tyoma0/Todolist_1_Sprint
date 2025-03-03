@@ -91,7 +91,7 @@ function App() {
         const newTodolist: todolistsType = {id, title: title, filter: 'all'}
         setTodolists([...todolists, newTodolist])
         setTasks({...tasks, [id]: []})
-    }
+    };
 
     return (
         <div className="app">
