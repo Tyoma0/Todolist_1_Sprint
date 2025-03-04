@@ -73,11 +73,12 @@ function App() {
     }
     //UI:
     const changeTodolistFilter = (todolistID: string, newFilterValue: FilterValuesType) => {
-        setTodolists(todolists.map(filtered => filtered.id === todolistID ? {
-            ...filtered,
-            filter: newFilterValue
-        } : filtered))
-        //setFilter(newFilterValue)
+        setTodolists(todolists.map(filtered => filtered.id === todolistID ? {...filtered, filter: newFilterValue} : filtered))
+
+    }
+    const changeTaskTitle =(todolistID: string,taskId: string,title:string)=>{
+        setTasks({...tasks,[todolistID]:tasks[todolistID].map(t=>t.id===taskId ? {...t,title}:t)})
+
     }
 
 
@@ -93,9 +94,13 @@ function App() {
         setTasks({...tasks, [id]: []})
     };
 
+    const changeTodolistTitle =(todolistID:string,title:string)=>{
+setTodolists(todolists.map(t=>t.id ===todolistID ?{...t,title}:t))
+    }
+
     return (
         <div className="app">
-            <AddItemForm addItem={addTodolist}/>
+            <AddItemForm addItem={addTodolist} maxTitleLength={10}/>
             {todolists.map((mapTodolists) => {
                 let tasksForTodolist = tasks[mapTodolists.id]
                 if (mapTodolists.filter === "active") {
@@ -116,6 +121,8 @@ function App() {
                         changeTodolistFilter={changeTodolistFilter}
                         changeTaskStatus={changeTaskStatus}
                         filter={mapTodolists.filter}
+                        changeTaskTitle={changeTaskTitle}
+                        changeTodolistTitle={changeTodolistTitle}
                     />
                 )
             })}

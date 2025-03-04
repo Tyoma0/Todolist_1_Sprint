@@ -5,15 +5,16 @@ import {KeyboardEvent, useState} from "react";
 type Props = {
 
     addItem: (title: string) => void
+maxTitleLength: number
 
 };
-export const AddItemForm = ({addItem}: Props) => {
+export const AddItemForm = ({addItem,maxTitleLength}: Props) => {
 
     const [itemTitle, setItemTitle] = useState<string>("")
     const [error, setError] = useState<boolean>(false)
 
     const createItemOnKeyDownHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter" && itemTitle && itemTitle.length <= 16) {
+        if (e.key === "Enter" && itemTitle && itemTitle.length <= 15) {
             createItemOnClickHandler()
         }
     }
@@ -32,7 +33,7 @@ export const AddItemForm = ({addItem}: Props) => {
         <div>
             <input
                 value={itemTitle}
-                placeholder="max title length is 15 charters"
+                placeholder={`max title length is ${maxTitleLength} charters`}
                 onChange={(e) => {
                     error && setError(false)
                     setItemTitle(e.currentTarget.value)
@@ -45,8 +46,8 @@ export const AddItemForm = ({addItem}: Props) => {
                 isDisabled={!itemTitle || itemTitle.length > 15}
                 onClickHandler={createItemOnClickHandler}
             />
-            {itemTitle && itemTitle.length <= 15 && <div>max title length is 15 charters</div>}
-            {itemTitle.length > 15 && <div style={{color: "red"}}>title is too long</div>}
+            {itemTitle && itemTitle.length <= maxTitleLength && <div>{`max title length is ${maxTitleLength} charters`}</div>}
+            {itemTitle.length > maxTitleLength && <div style={{color: "red"}}>title is too long</div>}
             {error && <div style={{color: "red"}}>title is required</div>}
 
 
