@@ -80,7 +80,7 @@ function App() {
         setTasks({...tasks,[todolistID]:tasks[todolistID].map(t=>t.id===taskId ? {...t,title}:t)})
 
     }
-        //
+
 
     const deleteTodolist = (todolistID: string) => {
         setTodolists(todolists.filter(tl => tl.id !== todolistID))
