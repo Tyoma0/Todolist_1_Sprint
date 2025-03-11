@@ -3,8 +3,22 @@ import './App.css'
 import {Todolist} from './Todolist'
 import {v1} from 'uuid';
 import {AddItemForm} from "./AddItemForm.tsx";
+import AppBar from '@mui/material/AppBar'
+import Toolbar from '@mui/material/Toolbar'
+import IconButton from '@mui/material/IconButton'
+import MenuIcon from '@mui/icons-material/Menu'
+import Container from '@mui/material/Container'
+import Grid from '@mui/material/Grid2'
+import Paper from '@mui/material/Paper'
+import {MaterialUISwitch, NavButton} from './NavButton'
+import {containerSx} from "./TodolistItem.styles.ts";
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import CssBaseline from '@mui/material/CssBaseline'
+import {FormControlLabel} from "@mui/material";
 
 export type FilterValuesType = "all" | "active" | "completed"
+
+type ThemeMode = 'dark' | 'light'
 
 export type todolistsType = {
     id: string,
@@ -12,9 +26,23 @@ export type todolistsType = {
     filter: FilterValuesType
 }
 
+
+
 // (C)-(R)-(U1)-(D)
 function App() {
 
+    const [themeMode, setThemeMode] = useState<ThemeMode>('light')
+    const theme = createTheme({
+        palette: {
+            mode: themeMode,
+            primary: {
+                main: '#087EA4',
+            },
+        },
+    })
+    const changeMode = () => {
+        setThemeMode(themeMode === 'light' ? 'dark' : 'light')
+    }
     // BLL:
     // const todolistTitle: string = "What to learn"
 
@@ -100,7 +128,32 @@ setTodolists(todolists.map(t=>t.id ===todolistID ?{...t,title}:t))
 
     return (
         <div className="app">
-            <AddItemForm addItem={addTodolist} maxTitleLength={10}/>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+            <AppBar position="static" sx={{ mb: '30px' }}>
+                <Toolbar>
+                    <Container maxWidth={'lg'} sx={containerSx}>
+                        <IconButton color="inherit">
+                            <MenuIcon />
+                        </IconButton>
+                        <div>
+                            <NavButton>Sign in</NavButton>
+                            <NavButton>Sign up</NavButton>
+                            <NavButton background={theme.palette.primary.dark}>Faq</NavButton>
+                            <FormControlLabel
+                                control={<MaterialUISwitch sx={{ m: 1 }}   onChange={changeMode}/>}
+                                label=""
+                            />
+                        </div>
+
+                    </Container>
+                </Toolbar>
+            </AppBar>
+            <Container maxWidth={'lg'}>
+                <Grid container sx={{ mb: '30px' }}>
+                    <AddItemForm addItem={addTodolist} maxTitleLength={10}/>
+                </Grid>
+                <Grid container spacing={4}>
             {todolists.map((mapTodolists) => {
                 let tasksForTodolist = tasks[mapTodolists.id]
                 if (mapTodolists.filter === "active") {
@@ -110,6 +163,8 @@ setTodolists(todolists.map(t=>t.id ===todolistID ?{...t,title}:t))
                     tasksForTodolist = tasks[mapTodolists.id].filter(t => t.isDone === true)
                 }
                 return (
+                    <Grid key={mapTodolists.id}>
+                        <Paper elevation={8} sx={{p:'15px'}}>
                     <Todolist
                         deleteTodolist={deleteTodolist}
                         key={mapTodolists.id}
@@ -123,10 +178,15 @@ setTodolists(todolists.map(t=>t.id ===todolistID ?{...t,title}:t))
                         filter={mapTodolists.filter}
                         changeTaskTitle={changeTaskTitle}
                         changeTodolistTitle={changeTodolistTitle}
+
                     />
+                        </Paper>
+                    </Grid>
                 )
             })}
-
+                </Grid>
+            </Container>
+            </ThemeProvider>
         </div>
     )
 }

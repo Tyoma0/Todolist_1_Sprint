@@ -1,15 +1,18 @@
 .app {
-  padding: 30px;
   display: flex;
+  flex-direction: column;
+  width: 100vw;
 }
 
-.app > div {
-  margin-right: 50px;
+.container {
+  display: flex;
+  align-items: center;
 }
+
 
 .task-done{
-  color: green;
-  text-decoration: line-through;
+
+  opacity: 0.5;
 }
 
 .task{
