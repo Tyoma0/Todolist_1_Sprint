@@ -75,7 +75,7 @@ function App() {
             {id: v1(), title: "GraphQL2", isDone: false},
         ]
     });
-
+    //UI
     const deleteTask = (todolistID: string, taskId: string) => {
         setTasks({...tasks, [todolistID]: tasks[todolistID].filter(t => t.id !== taskId)})
         // setTasks(tasks.filter(t => t.id !== taskId))
@@ -84,31 +84,20 @@ function App() {
     const createTask = (todolistID: string, title: string) => {
         let newTask = {id: v1(), title: title, isDone: false}
         setTasks({...tasks, [todolistID]: [newTask, ...tasks[todolistID]]})
-        // const newTask: TaskType = {
-        //   id: v1(),
-        //   title: title,
-        //   isDone: false
-        // }
-        // const nextState: Array<TaskType> = [...tasks, newTask]
-        // setTasks(nextState)
     }
 
     const changeTaskStatus = (todolistID: string, taskId: string, newStatus: boolean) => {
         setTasks({...tasks, [todolistID]: tasks[todolistID].map(t => t.id === taskId ? {...t, isDone: newStatus} : t)})
-
-        // const nextState: Array<TaskType> = tasks.map(t => t.id === taskId ? { ...t, isDone: newStatus } : t)
-        // setTasks(nextState)
     }
-    //UI:
+
     const changeTodolistFilter = (todolistID: string, newFilterValue: FilterValuesType) => {
         setTodolists(todolists.map(filtered => filtered.id === todolistID ? {...filtered, filter: newFilterValue} : filtered))
-
     }
+
     const changeTaskTitle =(todolistID: string,taskId: string,title:string)=>{
         setTasks({...tasks,[todolistID]:tasks[todolistID].map(t=>t.id===taskId ? {...t,title}:t)})
 
     }
-
 
     const deleteTodolist = (todolistID: string) => {
         setTodolists(todolists.filter(tl => tl.id !== todolistID))
@@ -192,4 +181,3 @@ setTodolists(todolists.map(t=>t.id ===todolistID ?{...t,title}:t))
 }
 
 export default App
-//pnpmnn
