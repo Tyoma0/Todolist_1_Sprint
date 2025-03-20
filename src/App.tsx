@@ -128,7 +128,7 @@ function App() {
 // setTodolists(todolists.map(t=>t.id ===todolistID ?{...t,title}:t))
         dispachTodolist(changeTodolistTitleAC({id:todolistID,title:title}))
     }
-
+//
     return (
         <div className="app">
             <ThemeProvider theme={theme}>
