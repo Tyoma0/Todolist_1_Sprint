@@ -17,7 +17,7 @@ import CssBaseline from '@mui/material/CssBaseline'
 import {FormControlLabel} from "@mui/material";
 import {
     changeTodolistFilterAC,
-    changeTodolistTitleAC,
+    changeTodolistTitleAC, CreateTodolistAC,
     DeleteTodolistAC,
     todolistsReducer
 } from "./model/todolists-reducer.ts";
@@ -64,11 +64,13 @@ function App() {
     //     {id: todolistID1, title: 'What to learn', filter: 'all'},
     //     {id: todolistID2, title: 'What to buy', filter: 'all'},
     // ])
+const initState:Array<todolistsType>=[
+    {id: todolistID1, title: 'What to learn', filter: 'all'},
+    {id: todolistID2, title: 'What to buy', filter: 'all'},
+]
 
-    const [todolists, dispachTodolist] = useReducer(todolistsReducer,[
-        {id: todolistID1, title: 'What to learn', filter: 'all'},
-        {id: todolistID2, title: 'What to buy', filter: 'all'},
-    ])
+
+    const [todolists, dispachTodolist] = useReducer(todolistsReducer,initState)
 
     let [tasks, setTasks] = useState({
         [todolistID1]: [
@@ -119,8 +121,9 @@ function App() {
 
     const addTodolist = (title: string) => {
         const id = v1()
-        const newTodolist: todolistsType = {id, title: title, filter: 'all'}
-        setTodolists([...todolists, newTodolist])
+        dispachTodolist(CreateTodolistAC({id:id,title:title}))
+        // const newTodolist: todolistsType = {id, title: title, filter: 'all'}
+        // setTodolists([...todolists, newTodolist])
         setTasks({...tasks, [id]: []})
     };
 
