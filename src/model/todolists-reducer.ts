@@ -9,9 +9,9 @@ export type DeleteTodolistAT = ReturnType<typeof DeleteTodolistAC>
 export type CreateTodolistListAT = ReturnType<typeof CreateTodolistAC>
 
 
-export type ChangeTodolistListFilterAt = ReturnType<typeof changeTodolistTitleAC>
+export type ChangeTodolistListFilterAt = ReturnType<typeof changeTodolistFilterAC>
 
-export type ChangeTodolistTitleAT = ReturnType<typeof changeTodolistFilterAC>
+export type ChangeTodolistTitleAT = ReturnType<typeof changeTodolistTitleAC>
 
 export type ActionType = DeleteTodolistAT | CreateTodolistListAT | ChangeTodolistListFilterAt | ChangeTodolistTitleAT
 
