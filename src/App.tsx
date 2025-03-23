@@ -31,6 +31,9 @@ export type todolistsType = {
     title: string,
     filter: FilterValuesType
 }
+export type TaskListType ={
+    [todolistId:string]:Array<todolistsType>
+}
 
 
 
@@ -68,7 +71,7 @@ const initState:Array<todolistsType>=[
     {id: todolistID1, title: 'What to learn', filter: 'all'},
     {id: todolistID2, title: 'What to buy', filter: 'all'},
 ]
-
+//
 
     const [todolists, dispachTodolist] = useReducer(todolistsReducer,initState)
 
