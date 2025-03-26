@@ -1,38 +1,40 @@
-import {ChangeEvent, useState} from "react";
-import TextField from '@mui/material/TextField';
+import TextField from '@mui/material/TextField'
+import {type ChangeEvent, useState} from 'react'
 
-type props ={
-    value:string
-    changeTitle: ( title: string) => void
+type Props = {
+  value: string
+  onChange: (title: string) => void
 }
-export const EditableSpan = ({value,changeTitle}:props) => {
-    const [isEditMode, setIsEditMode] = useState(false)
-    const [title, setTitle] = useState(value)
-    const turnOnEditMode = () => {
-        setIsEditMode(true)
-    }
-    const turnOffEditMode = () => {
-        setIsEditMode(false)
-        changeTitle(title)
 
-    }
-    const changeTitleStatus = (event: ChangeEvent<HTMLInputElement>) => {
-        setTitle(event.currentTarget.value)
-    }
-    return (
-        <>
+export const EditableSpan = ({ value, onChange }: Props) => {
+  const [title, setTitle] = useState(value)
+  const [isEditMode, setIsEditMode] = useState(false)
 
-            {isEditMode ? (
-                <TextField variant={'outlined'}
-                           value={title}
-                           size={'small'}
-                           onChange={changeTitleStatus}
-                           onBlur={turnOffEditMode}
-                           autoFocus/>
-            ) : (
-                <span onDoubleClick={turnOnEditMode}>{value}</span>
-            )}
-        </>
-    );
-};
+  const turnOnEditMode = () => {
+    setIsEditMode(true)
+  }
 
+  const turnOffEditMode = () => {
+    setIsEditMode(false)
+    onChange(title)
+  }
+
+  const changeTitle = (event: ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.currentTarget.value)
+  }
+
+  return (
+      <>
+        {isEditMode ? (
+            <TextField variant={'outlined'}
+                       value={title}
+                       size={'small'}
+                       onChange={changeTitle}
+                       onBlur={turnOffEditMode}
+                       autoFocus/>
+        ) : (
+            <span onDoubleClick={turnOnEditMode}>{value}</span>
+        )}
+      </>
+  )
+}

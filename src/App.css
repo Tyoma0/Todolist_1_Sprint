@@ -8,20 +8,3 @@
   display: flex;
   align-items: center;
 }
-
-
-.task-done{
-
-  opacity: 0.5;
-}
-
-.task{
-  font-weight: bold;
-}
-.active-filter {
-  background-color: lightgreen;
-}
-.taskInputError{
-  border: 2px solid red;
-  outline: none;
-}
