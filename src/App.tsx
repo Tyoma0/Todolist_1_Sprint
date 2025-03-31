@@ -81,7 +81,7 @@ export const App = () => {
 //     return num * num
 //
 // }
-//..
+//....
 //
 // memoizedSqr = memoize(sqr);
 //
